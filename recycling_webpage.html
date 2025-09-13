@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoFuturo - Fomenta el Reciclaje</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        main {
+            margin-top: 80px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+        }
+
+        .section {
+            background: white;
+            margin: 2rem 0;
+            padding: 3rem 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+        }
+
+        .recycling-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .recycling-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recycling-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .recycling-card:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .recycling-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .recycling-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .recycling-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tip-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #28a745;
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .stats {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #feca57;
+        }
+
+        .calculator {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .calculator input {
+            padding: 10px;
+            margin: 0.5rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .calculator button {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .calculator button:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #d4edda;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #155724;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #feca57;
+            transform: scale(1.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .recycling-types {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">🌱 EcoFuturo</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#tipos">Tipos</a></li>
+                <li><a href="#consejos">Consejos</a></li>
+                <li><a href="#calculadora">Calculadora</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero">
+            <div class="container">
+                <h1 class="floating">♻️ Recicla por un Futuro Mejor</h1>
+                <p>Únete al movimiento global para proteger nuestro planeta. Cada acción cuenta.</p>
+                <button class="cta-button" onclick="scrollToSection('tipos')">¡Comienza a Reciclar!</button>
+            </div>
+        </section>
+
+        <section id="tipos" class="section">
+            <div class="container">
+                <h2>🗂️ Tipos de Reciclaje</h2>
+                <div class="recycling-types">
+                    <div class="recycling-card" onclick="showInfo('papel')">
+                        <div class="icon">📄</div>
+                        <h3>Papel y Cartón</h3>
+                        <p>Periódicos, revistas, cajas, sobres</p>
+                    </div>
+                    <div class="recycling-card" onclick="showInfo('plastico')">
+                        <div class="icon">🥤</div>
+                        <h3>Plástico</h3>
+                        <p>Botellas, envases, bolsas</p>
+                    </div>
+                    <div class="recycling-card" onclick="showInfo('vidrio')">
+                        <div class="icon">🍺</div>
+                        <h3>Vidrio</h3>
+                        <p>Botellas, frascos, cristales</p>
+                    </div>
+                    <div class="recycling-card" onclick="showInfo('metal')">
+                        <div class="icon">🥫</div>
+                        <h3>Metal</h3>
+                        <p>Latas, aluminio, cobre</p>
+                    </div>
+                    <div class="recycling-card" onclick="showInfo('organico')">
+                        <div class="icon">🍎</div>
+                        <h3>Orgánico</h3>
+                        <p>Restos de comida, hojas</p>
+                    </div>
+                    <div class="recycling-card" onclick="showInfo('electronico')">
+                        <div class="icon">📱</div>
+                        <h3>Electrónico</h3>
+                        <p>Teléfonos, computadoras, pilas</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="container">
+                <h2>📊 Impacto del Reciclaje</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>75%</h3>
+                        <p>Reducción de energía al reciclar aluminio</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>17</h3>
+                        <p>Árboles salvados por tonelada de papel reciclado</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>1000</h3>
+                        <p>Años que tarda el plástico en degradarse</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>90%</h3>
+                        <p>Reducción de contaminación del agua</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="consejos" class="section">
+            <div class="container">
+                <h2>💡 Consejos Prácticos</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h3>🧹 Limpia los Envases</h3>
+                        <p>Antes de reciclar, asegúrate de limpiar los envases para evitar contaminar otros materiales reciclables.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3>🏷️ Separa Correctamente</h3>
+                        <p>Utiliza contenedores separados para cada tipo de material. Esto facilita el proceso de reciclaje.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3>♻️ Reduce y Reutiliza</h3>
+                        <p>Antes de reciclar, piensa si puedes reducir el consumo o reutilizar el objeto de otra manera.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3>📚 Infórmate</h3>
+                        <p>Conoce las reglas de reciclaje de tu localidad, ya que pueden variar según la región.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculadora" class="section">
+            <div class="container">
+                <h2>🧮 Calculadora de Impacto</h2>
+                <div class="calculator">
+                    <h3>Calcula tu Impacto Ambiental</h3>
+                    <div>
+                        <input type="number" id="papel" placeholder="Kg de papel reciclado">
+                        <input type="number" id="plastico" placeholder="Kg de plástico reciclado">
+                        <input type="number" id="vidrio" placeholder="Kg de vidrio reciclado">
+                        <input type="number" id="metal" placeholder="Kg de metal reciclado">
+                        <br>
+                        <button onclick="calculateImpact()">Calcular Impacto</button>
+                    </div>
+                    <div id="impactResult" class="result" style="display: none;"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contacto">
+        <div class="container">
+            <h3>🌍 EcoFuturo - Juntos por el Planeta</h3>
+            <div class="social-links">
+                <a href="#" title="Facebook">📘</a>
+                <a href="#" title="Twitter">🐦</a>
+                <a href="#" title="Instagram">📷</a>
+                <a href="#" title="YouTube">📺</a>
+            </div>
+            <p>&copy; 2024 EcoFuturo. Todos los derechos reservados.</p>
+            <p>Contacto: info@ecofuturo.com | Tel: +1 (555) 123-4567</p>
+        </div>
+    </footer>
+
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function showInfo(type) {
+            const info = {
+                papel: "El papel es 100% reciclable. Una tonelada de papel reciclado salva 17 árboles y ahorra 26,500 litros de agua.",
+                plastico: "El plástico puede reciclarse múltiples veces. Reciclar una botella de plástico ahorra energía suficiente para encender una bombilla por 6 horas.",
+                vidrio: "El vidrio es infinitamente reciclable sin perder calidad. Reciclar vidrio reduce las emisiones de CO2 en un 20%.",
+                metal: "Reciclar aluminio usa 95% menos energía que producirlo nuevo. Una lata reciclada se convierte en nueva lata en 60 días.",
+                organico: "Los residuos orgánicos pueden convertirse en compost rico en nutrientes para las plantas.",
+                electronico: "Los dispositivos electrónicos contienen materiales valiosos que pueden recuperarse y reutilizarse."
+            };
+            
+            alert(info[type]);
+        }
+
+        function calculateImpact() {
+            const papel = parseFloat(document.getElementById('papel').value) || 0;
+            const plastico = parseFloat(document.getElementById('plastico').value) || 0;
+            const vidrio = parseFloat(document.getElementById('vidrio').value) || 0;
+            const metal = parseFloat(document.getElementById('metal').value) || 0;
+
+            const arbolesSalvados = papel * 0.017;
+            const energiaAhorrada = (plastico * 1.8) + (metal * 14) + (vidrio * 0.3);
+            const co2Reducido = (papel * 1.1) + (plastico * 2) + (vidrio * 0.3) + (metal * 8);
+
+            const resultDiv = document.getElementById('impactResult');
+            resultDiv.innerHTML = `
+                <h4>🌟 ¡Tu Impacto Positivo!</h4>
+                <p>🌳 Árboles salvados: ${arbolesSalvados.toFixed(1)}</p>
+                <p>⚡ Energía ahorrada: ${energiaAhorrada.toFixed(1)} kWh</p>
+                <p>🌍 CO2 reducido: ${co2Reducido.toFixed(1)} kg</p>
+                <p>¡Excelente trabajo! Cada kilogramo reciclado marca la diferencia.</p>
+            `;
+            resultDiv.style.display = 'block';
+        }
+
+        // Efecto de scroll para el header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(15px)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.1)';
+                header.style.backdropFilter = 'blur(10px)';
+            }
+        });
+
+        // Animación de aparición de elementos
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
